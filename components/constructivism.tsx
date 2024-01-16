@@ -61,7 +61,7 @@ export default function Constructivism() {
             }}
           >
             <Image
-              className="w-full h-full object-contain opacity-0 transition-opacity duration-1000"
+              className="w-full h-full object-contain opacity-0 transition-opacity duration-500"
               src={item.src}
               alt={item.alt}
               draggable="false"
