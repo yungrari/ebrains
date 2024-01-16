@@ -1,24 +1,39 @@
-import Link from 'next/link'
+'use client'
+
+import { useState, useCallback } from 'react'
 
 import { cn } from '@/lib/utils'
 
-export default function Window({ open }: { open?: string }) {
+export default function Window() {
+  const [isOpened, setIsOpened] = useState(false)
+
+  const handleClick = useCallback(() => {
+    if (isOpened) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+
+    setIsOpened(!isOpened)
+  }, [isOpened])
+
   return (
     <>
-      <Link
+      <button
         className="fixed top-0 right-0 p-2 z-10 uppercase tracking-tighter font-medium hover:opacity-50"
-        href={!open ? '/?open=1' : '/'}
+        type="button"
         title="About"
+        onClick={handleClick}
       >
         About
-      </Link>
+      </button>
 
       <article
         className={cn(
-          'flex flex-col justify-center text-4xl md:text-5xl font-medium tracking-tighter indent-20 backdrop-blur-lg bg-white bg-opacity-50 transition-opacity duration-500',
-          !open
-            ? 'invisible opacity-0 h-px'
-            : 'visible opacity-1 h-auto min-h-screen p-2'
+          'flex flex-col justify-center text-3xl md:text-5xl font-medium tracking-tighter indent-20 backdrop-blur-lg bg-white bg-opacity-50 transition-opacity duration-500',
+          isOpened
+            ? 'visible opacity-1 h-auto min-h-screen p-2'
+            : 'invisible opacity-0 h-px'
         )}
       >
         <h1 className="indent-0">

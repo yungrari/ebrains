@@ -2,16 +2,12 @@ import Constructivism from '@/components/constructivism'
 import Logotype from '@/components/logotype'
 import Window from '@/components/window'
 
-export default function Home({
-  searchParams,
-}: {
-  searchParams: { open?: string }
-}) {
+export default function Home() {
   return (
-    <main className="overflow-hidden">
+    <main>
       <Logotype />
       <Constructivism />
-      <Window open={searchParams.open} />
+      <Window />
     </main>
   )
 }
