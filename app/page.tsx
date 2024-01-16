@@ -1,3 +1,9 @@
+import Constructivism from '@/components/constructivism'
+
 export default function Home() {
-  return <main></main>
+  return (
+    <main>
+      <Constructivism />
+    </main>
+  )
 }
