@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import Image from 'next/image'
 
 import pic1 from '@/public/1.webp'
@@ -24,11 +24,32 @@ const PERSPECTIVE = 5000
 export default function Constructivism() {
   const [degree, setDegree] = useState([0, 0])
 
-  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
-    const element = event.target as HTMLImageElement
+  const touchStart = useRef({ x: 0, y: 0 })
 
-    element.classList.remove('opacity-0')
-  }
+  const handleImageLoad = useCallback(
+    (event: React.SyntheticEvent<HTMLImageElement>) => {
+      const element = event.target as HTMLImageElement
+      element.classList.remove('opacity-0')
+    },
+    []
+  )
+
+  const handleTouchStart = useCallback((event: React.TouchEvent) => {
+    const touch = event.touches[0]
+    touchStart.current = { x: touch.clientX, y: touch.clientY }
+  }, [])
+
+  const handleTouchMove = useCallback((event: React.TouchEvent) => {
+    const touch = event.touches[0]
+    const deltaX = touch.clientX - touchStart.current.x
+    const deltaY = touch.clientY - touchStart.current.y
+
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      setDegree([degree[0], (deltaX / window.innerWidth) * 360])
+    } else {
+      setDegree([(deltaY / window.innerHeight) * 360, degree[1]])
+    }
+  }, [degree])
 
   return (
     <div
@@ -38,11 +59,13 @@ export default function Constructivism() {
         height: `${HEIGHT}vh`,
         perspective: `${PERSPECTIVE}px`,
       }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
     >
       <div
         className="absolute w-full h-full transition-all duration-1000 ease-in-out"
         style={{
-          transform: `rotateY(${degree[0]}deg)`,
+          transform: `rotateX(${degree[0]}deg) rotateY(${degree[1]}deg)`,
           transformStyle: 'preserve-3d',
         }}
       >

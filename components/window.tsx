@@ -17,7 +17,7 @@ export default function Window({ open }: { open?: string }) {
         className={cn(
           'flex flex-col justify-center text-4xl md:text-5xl font-medium tracking-tighter indent-20 backdrop-blur-lg bg-white bg-opacity-50 transition-opacity duration-500',
           !open
-            ? 'invisible opacity-0 h-0'
+            ? 'invisible opacity-0 h-px'
             : 'visible opacity-1 h-auto min-h-screen p-2'
         )}
       >
