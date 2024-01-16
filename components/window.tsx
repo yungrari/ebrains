@@ -16,7 +16,7 @@ export default function Window({ open }: { open?: string }) {
       <article
         className={cn(
           'min-h-screen text-4xl md:text-5xl md:leading-none font-medium tracking-tighter indent-20 p-2 backdrop-blur-lg bg-white bg-opacity-50 transition-opacity duration-500',
-          !open ? 'opacity-0' : 'opacity-1'
+          !open ? 'invisible opacity-0' : 'visible opacity-1'
         )}
       >
         <h1 className="indent-0">
