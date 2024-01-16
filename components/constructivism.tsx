@@ -45,11 +45,17 @@ export default function Constructivism() {
     const deltaY = touch.clientY - touchStart.current.y
 
     if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      setDegree([degree[0], (deltaX / window.innerWidth) * 360])
+      setDegree((prevDegree) => [
+        prevDegree[0],
+        prevDegree[1] + (deltaX / window.innerWidth) * 360,
+      ])
     } else {
-      setDegree([(deltaY / window.innerHeight) * 360, degree[1]])
+      setDegree((prevDegree) => [
+        prevDegree[0] + (deltaY / window.innerHeight) * 360,
+        prevDegree[1],
+      ])
     }
-  }, [degree])
+  }, [])
 
   return (
     <div
