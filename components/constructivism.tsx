@@ -3,19 +3,32 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
+import pic1 from '@/public/1.webp'
+import pic2 from '@/public/2.webp'
+import pic3 from '@/public/3.webp'
+import pic4 from '@/public/4.webp'
+import pic5 from '@/public/5.webp'
+
+const items = [
+  { src: pic1, alt: 'MEG' },
+  { src: pic2, alt: 'DIE' },
+  { src: pic3, alt: 'HDC' },
+  { src: pic4, alt: 'PENTAGRAM' },
+  { src: pic5, alt: 'TOR' },
+]
+
 const WIDTH = 40
 const HEIGHT = 30
 const PERSPECTIVE = 5000
-const CELLS = [
-  '/MEG.png',
-  '/die-unscreen(1).gif',
-  '/HDC2.png',
-  '/penta.png',
-  '/tor(2).gif',
-]
 
 export default function Constructivism() {
   const [degree, setDegree] = useState([0, 0])
+
+  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const element = event.target as HTMLImageElement
+
+    element.classList.remove('opacity-0')
+  }
 
   return (
     <div
@@ -33,9 +46,9 @@ export default function Constructivism() {
           transformStyle: 'preserve-3d',
         }}
       >
-        {CELLS.map((src, index, array) => (
+        {items.map((item, index, array) => (
           <div
-            key={src}
+            key={item.alt}
             className="absolute bg-no-repeat bg-center overflow-hidden border border-solid border-gray-300"
             style={{
               width: `${WIDTH}vw`,
@@ -48,13 +61,12 @@ export default function Constructivism() {
             }}
           >
             <Image
-              className="w-full h-full object-contain"
-              src={src}
-              alt={src}
+              className="w-full h-full object-contain opacity-0 transition-opacity duration-1000"
+              src={item.src}
+              alt={item.alt}
               draggable="false"
-              fill
               priority={index === 0}
-              sizes="20vw"
+              onLoad={handleImageLoad}
             />
           </div>
         ))}
