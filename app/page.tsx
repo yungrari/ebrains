@@ -8,7 +8,7 @@ export default function Home({
   searchParams: { open?: string }
 }) {
   return (
-    <main>
+    <main className="overflow-hidden">
       <Logotype />
       <Constructivism />
       <Window open={searchParams.open} />
