@@ -57,6 +57,36 @@ export default function Constructivism() {
     }
   }, [])
 
+  const isDragging = useRef(false)
+
+  const handleMouseDown = useCallback((event: React.MouseEvent) => {
+    touchStart.current = { x: event.clientX, y: event.clientY }
+    isDragging.current = true
+  }, [])
+
+  const handleMouseMove = useCallback((event: React.MouseEvent) => {
+    if (!isDragging.current) return
+
+    const deltaX = event.clientX - touchStart.current.x
+    const deltaY = event.clientY - touchStart.current.y
+
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      setDegree((prevDegree) => [
+        prevDegree[0],
+        prevDegree[1] + (deltaX / window.innerWidth) * 360,
+      ])
+    } else {
+      setDegree((prevDegree) => [
+        prevDegree[0] + (deltaY / window.innerHeight) * 360,
+        prevDegree[1],
+      ])
+    }
+  }, [])
+
+  const handleMouseUp = useCallback(() => {
+    isDragging.current = false
+  }, [])
+
   return (
     <div
       className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000 ease-in-out"
@@ -65,8 +95,11 @@ export default function Constructivism() {
         height: `${HEIGHT}vh`,
         perspective: `${PERSPECTIVE}px`,
       }}
-      onTouchStart={handleTouchStart}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
       onTouchMove={handleTouchMove}
+      onTouchStart={handleTouchStart}
     >
       <div
         className="absolute w-full h-full transition-all duration-1000 ease-in-out"
