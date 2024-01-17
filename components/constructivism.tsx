@@ -34,16 +34,7 @@ export default function Constructivism() {
     []
   )
 
-  const handleTouchStart = useCallback((event: React.TouchEvent) => {
-    const touch = event.touches[0]
-    touchStart.current = { x: touch.clientX, y: touch.clientY }
-  }, [])
-
-  const handleTouchMove = useCallback((event: React.TouchEvent) => {
-    const touch = event.touches[0]
-    const deltaX = touch.clientX - touchStart.current.x
-    const deltaY = touch.clientY - touchStart.current.y
-
+  const handleMove = useCallback((deltaX: number, deltaY: number) => {
     if (Math.abs(deltaX) > Math.abs(deltaY)) {
       setDegree((prevDegree) => [
         prevDegree[0],
@@ -56,6 +47,23 @@ export default function Constructivism() {
       ])
     }
   }, [])
+
+  const handleTouchStart = useCallback((event: React.TouchEvent) => {
+    const touch = event.touches[0]
+    touchStart.current = { x: touch.clientX, y: touch.clientY }
+  }, [])
+
+  const handleTouchMove = useCallback(
+    (event: React.TouchEvent) => {
+      const touch = event.touches[0]
+
+      const deltaX = touch.clientX - touchStart.current.x
+      const deltaY = touch.clientY - touchStart.current.y
+
+      handleMove(deltaX, deltaY)
+    },
+    [handleMove]
+  )
 
   const isDragging = useRef(false)
 
@@ -64,24 +72,17 @@ export default function Constructivism() {
     isDragging.current = true
   }, [])
 
-  const handleMouseMove = useCallback((event: React.MouseEvent) => {
-    if (!isDragging.current) return
+  const handleMouseMove = useCallback(
+    (event: React.MouseEvent) => {
+      if (!isDragging.current) return
 
-    const deltaX = event.clientX - touchStart.current.x
-    const deltaY = event.clientY - touchStart.current.y
+      const deltaX = event.clientX - touchStart.current.x
+      const deltaY = event.clientY - touchStart.current.y
 
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      setDegree((prevDegree) => [
-        prevDegree[0],
-        prevDegree[1] + (deltaX / window.innerWidth) * 360,
-      ])
-    } else {
-      setDegree((prevDegree) => [
-        prevDegree[0] + (deltaY / window.innerHeight) * 360,
-        prevDegree[1],
-      ])
-    }
-  }, [])
+      handleMove(deltaX, deltaY)
+    },
+    [handleMove]
+  )
 
   const handleMouseUp = useCallback(() => {
     isDragging.current = false
@@ -89,7 +90,7 @@ export default function Constructivism() {
 
   return (
     <div
-      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000 ease-in-out"
+      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000 ease-in-out cursor-move"
       style={{
         width: `${WIDTH}vw`,
         height: `${HEIGHT}vh`,
