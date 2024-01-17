@@ -4,7 +4,7 @@ import Window from '@/components/window'
 
 export default function Home() {
   return (
-    <main className="w-screen h-screen overflow-y-auto">
+    <main className="h-svh overflow-y-auto">
       <Logotype />
       <Constructivism />
       <Window />
