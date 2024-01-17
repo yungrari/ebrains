@@ -16,8 +16,8 @@ const config = {
     { src: pic1, alt: 'MEG' },
     { src: pic2, alt: 'DIE' },
     { src: pic3, alt: 'HDC' },
-    { src: pic4, alt: 'PENTAGRAM', invert: true },
-    { src: pic5, alt: 'TOR', invert: true },
+    { src: pic4, alt: 'PENTAGRAM' },
+    { src: pic5, alt: 'TOR' },
   ],
 }
 
@@ -132,7 +132,7 @@ export default function Constructivism() {
         {config.items.map((item, index, array) => (
           <div
             key={item.alt}
-            className="absolute bg-no-repeat bg-center overflow-hidden border border-solid border-neutral-300 dark:border-neutral-600"
+            className="absolute bg-no-repeat bg-center overflow-hidden border border-solid border-neutral-300"
             style={{
               width: `${WIDTH}vw`,
               height: `${HEIGHT}vh`,
@@ -144,10 +144,7 @@ export default function Constructivism() {
             }}
           >
             <Image
-              className={cn(
-                'w-full h-full object-contain opacity-0 transition-opacity duration-500 select-none',
-                item.invert && 'dark:invert'
-              )}
+              className="w-full h-full object-contain opacity-0 transition-opacity duration-500 select-none"
               src={item.src}
               alt={item.alt}
               draggable="false"

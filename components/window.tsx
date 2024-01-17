@@ -6,7 +6,7 @@ export default function Window() {
   return (
     <>
       <label
-        className="fixed top-0 right-0 px-3 py-2 z-10 uppercase tracking-tighter font-medium cursor-pointer text-black dark:text-neutral-300 hover:opacity-50"
+        className="fixed top-0 right-0 px-3 py-2 z-10 uppercase tracking-tighter font-medium cursor-pointer text-black hover:opacity-50"
         htmlFor={id}
         title="About"
       >
@@ -15,7 +15,7 @@ export default function Window() {
 
       <input className="hidden peer" id={id} type="checkbox" />
 
-      <article className="flex flex-col justify-center text-3xl md:text-5xl font-medium tracking-tighter indent-20 backdrop-blur-lg transition-opacity duration-500 invisible opacity-0 h-px peer-checked:visible peer-checked:opacity-100 peer-checked:h-auto peer-checked:min-h-screen peer-checked:p-2 bg-white/50 dark:bg-neutral-800/50 dark:text-neutral-300">
+      <article className="flex flex-col justify-center text-3xl md:text-5xl font-medium tracking-tighter indent-20 backdrop-blur-lg transition-opacity duration-500 invisible opacity-0 h-px peer-checked:visible peer-checked:opacity-100 peer-checked:h-auto peer-checked:min-h-screen peer-checked:p-2 bg-white/50">
         <h1 className="indent-0">
           EBRAINS CoCreate Artificial Intelligence Art
         </h1>

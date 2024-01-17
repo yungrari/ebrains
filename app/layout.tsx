@@ -19,14 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          inter.className,
-          'overscroll-none overflow-hidden bg-white dark:bg-neutral-800'
-        )}
-      >
-        {children}
-      </body>
+      <body className={cn(inter.className, 'overflow-hidden')}>{children}</body>
     </html>
   )
 }
