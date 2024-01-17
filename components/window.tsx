@@ -1,41 +1,21 @@
-'use client'
-
-import { useState, useCallback } from 'react'
-
-import { cn } from '@/lib/utils'
+import { useId } from 'react'
 
 export default function Window() {
-  const [isOpened, setIsOpened] = useState(false)
-
-  const handleClick = useCallback(() => {
-    if (isOpened) {
-      document.body.classList.add('overflow-hidden')
-    } else {
-      document.body.classList.remove('overflow-hidden')
-    }
-
-    setIsOpened(!isOpened)
-  }, [isOpened])
+  const id = useId()
 
   return (
     <>
-      <button
+      <label
         className="fixed top-0 right-0 p-2 z-10 uppercase tracking-tighter font-medium hover:opacity-50"
-        type="button"
+        htmlFor={id}
         title="About"
-        onClick={handleClick}
       >
         About
-      </button>
+      </label>
 
-      <article
-        className={cn(
-          'flex flex-col justify-center text-3xl md:text-5xl font-medium tracking-tighter indent-20 backdrop-blur-lg bg-white bg-opacity-50 transition-opacity duration-500',
-          isOpened
-            ? 'visible opacity-1 h-auto min-h-screen p-2'
-            : 'invisible opacity-0 h-px'
-        )}
-      >
+      <input className="hidden peer" id={id} type="checkbox" />
+
+      <article className="flex flex-col justify-center text-3xl md:text-5xl font-medium tracking-tighter indent-20 backdrop-blur-lg bg-white bg-opacity-50 transition-opacity duration-500 invisible opacity-0 h-px peer-checked:visible peer-checked:opacity-100 peer-checked:h-auto peer-checked:min-h-screen peer-checked:p-2">
         <h1 className="indent-0">
           EBRAINS CoCreate Artificial Intelligence Art
         </h1>
