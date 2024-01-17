@@ -19,7 +19,7 @@ const config = {
     { src: pic4, alt: 'PENTAGRAM' },
     { src: pic5, alt: 'TOR' },
   ],
-}
+} as const
 
 const WIDTH = 40
 const HEIGHT = 30
@@ -31,14 +31,6 @@ export default function Constructivism() {
 
   const isDragging = useRef(false)
   const touchStart = useRef({ x: 0, y: 0 })
-
-  const handleImageLoad = useCallback(
-    (event: React.SyntheticEvent<HTMLImageElement>) => {
-      const element = event.target as HTMLImageElement
-      element.classList.remove('opacity-0')
-    },
-    []
-  )
 
   const handleMove = useCallback((deltaX: number, deltaY: number) => {
     if (Math.abs(deltaX) > Math.abs(deltaY)) {
@@ -57,6 +49,7 @@ export default function Constructivism() {
   const handleTouchStart = useCallback((event: React.TouchEvent) => {
     const touch = event.touches[0]
     touchStart.current = { x: touch.clientX, y: touch.clientY }
+
     setIsAutoplay(false)
   }, [])
 
@@ -75,6 +68,7 @@ export default function Constructivism() {
   const handleMouseDown = useCallback((event: React.MouseEvent) => {
     touchStart.current = { x: event.clientX, y: event.clientY }
     isDragging.current = true
+
     setIsAutoplay(false)
   }, [])
 
@@ -97,6 +91,7 @@ export default function Constructivism() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       const isTouched = Object.values(touchStart.current).some(Boolean)
+
       setIsAutoplay(!isTouched)
     }, 10000)
 
@@ -138,18 +133,20 @@ export default function Constructivism() {
               height: `${HEIGHT}vh`,
               transform: `rotateY(${
                 (360 / array.length) * index
-              }deg) translateZ(${
-                WIDTH / 2 / Math.tan(Math.PI / array.length)
-              }vw)`,
+              }deg) translateZ(${(
+                WIDTH /
+                2 /
+                Math.tan(Math.PI / array.length)
+              ).toFixed(4)}vw)`,
             }}
           >
             <Image
-              className="w-full h-full object-contain opacity-0 transition-opacity duration-500 select-none"
+              className="w-full h-full object-contain select-none"
               src={item.src}
               alt={item.alt}
               draggable="false"
               priority={index === 0}
-              onLoad={handleImageLoad}
+              sizes="20vw"
             />
           </div>
         ))}
