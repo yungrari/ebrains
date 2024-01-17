@@ -112,7 +112,7 @@ export default function Constructivism() {
         {items.map((item, index, array) => (
           <div
             key={item.alt}
-            className="absolute bg-no-repeat bg-center overflow-hidden border border-solid border-gray-300"
+            className="absolute bg-no-repeat bg-center overflow-hidden border border-solid border-neutral-300"
             style={{
               width: `${WIDTH}vw`,
               height: `${HEIGHT}vh`,
