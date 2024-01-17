@@ -6,7 +6,7 @@ export default function Window() {
   return (
     <>
       <label
-        className="fixed top-0 right-0 p-2 z-10 uppercase tracking-tighter font-medium hover:opacity-50"
+        className="fixed top-0 right-0 p-2 z-10 uppercase tracking-tighter font-medium cursor-pointer hover:opacity-50"
         htmlFor={id}
         title="About"
       >
