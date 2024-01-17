@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { cn } from '@/lib/utils'
 
@@ -19,7 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, 'overflow-hidden')}>{children}</body>
+      <body className={cn(inter.className, 'overflow-hidden')}>
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   )
 }
