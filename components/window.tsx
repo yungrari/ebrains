@@ -15,7 +15,7 @@ export default function Window() {
 
       <input className="hidden peer" id={id} type="checkbox" />
 
-      <article className="flex flex-col justify-center text-3xl md:text-5xl font-medium tracking-tighter indent-20 backdrop-blur-lg transition-opacity duration-500 invisible opacity-0 h-px peer-checked:visible peer-checked:opacity-100 peer-checked:h-auto peer-checked:min-h-screen peer-checked:p-2 bg-white/50">
+      <article className="flex flex-col justify-center text-3xl md:text-5xl font-medium tracking-tighter indent-20 bg-white/50 backdrop-blur-lg invisible opacity-0 h-px peer-checked:visible peer-checked:opacity-100 peer-checked:h-auto peer-checked:min-h-screen peer-checked:p-2">
         <h1 className="indent-0">
           EBRAINS CoCreate Artificial Intelligence Art
         </h1>
