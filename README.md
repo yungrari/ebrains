@@ -1,6 +1,4 @@
-# EBRAINS CoCreate Artificial Intelligence Art
-
-## [Demo](https://ebrains.vercel.app)
+# [EBRAINS CoCreate Artificial Intelligence Art](https://ebrains.vercel.app)
 
 ## Getting Started
 
