@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { cn } from '@/lib/utils'
+import Constructivism from '@/components/constructivism'
 
 import './globals.css'
 
@@ -21,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, 'overflow-hidden')}>
-        {children}
+        <main className="h-svh overflow-y-auto">
+          <Constructivism />
+          {children}
+        </main>
         <SpeedInsights />
       </body>
     </html>

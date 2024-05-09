@@ -1,11 +1,13 @@
-import Constructivism from '@/components/constructivism'
-import Window from '@/components/window'
+import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className="h-svh overflow-y-auto">
-      <Constructivism />
-      <Window />
-    </main>
+    <Link
+      className="fixed top-0 right-0 px-3 py-2 z-10 uppercase tracking-tighter font-medium cursor-pointer text-black hover:opacity-50"
+      href="/about"
+      title="ABOUT"
+    >
+      ABOUT
+    </Link>
   )
 }
