@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 
 import { cn } from '@/lib/utils'
@@ -19,7 +19,7 @@ const config = {
     { src: pic4, alt: 'PENTAGRAM' },
     { src: pic5, alt: 'TOR' },
   ],
-} as const
+}
 
 const WIDTH = 40
 const HEIGHT = 30
@@ -32,67 +32,52 @@ export default function Constructivism() {
   const isDragging = useRef(false)
   const touchStart = useRef({ x: 0, y: 0 })
 
-  const handleMove = useCallback((deltaX: number, deltaY: number) => {
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      setDegree((prevDegree) => [
-        prevDegree[0],
-        prevDegree[1] + (deltaX / window.innerWidth) * 360,
-      ])
-    } else {
-      setDegree((prevDegree) => [
-        prevDegree[0] + (deltaY / window.innerHeight) * 360,
-        prevDegree[1],
-      ])
-    }
-  }, [])
+  const handleMove = (deltaX: number, deltaY: number) => {
+    setDegree((prevDegree) =>
+      Math.abs(deltaX) > Math.abs(deltaY)
+        ? [prevDegree[0], prevDegree[1] + (deltaX / window.innerWidth) * 360]
+        : [prevDegree[0] + (deltaY / window.innerHeight) * 360, prevDegree[1]]
+    )
+  }
 
-  const handleTouchStart = useCallback((event: React.TouchEvent) => {
+  const handleTouchStart = (event: React.TouchEvent) => {
     const touch = event.touches[0]
     touchStart.current = { x: touch.clientX, y: touch.clientY }
 
     setIsAutoplay(false)
-  }, [])
+  }
 
-  const handleTouchMove = useCallback(
-    (event: React.TouchEvent) => {
-      const touch = event.touches[0]
+  const handleTouchMove = (event: React.TouchEvent) => {
+    const touch = event.touches[0]
+    const deltaX = touch.clientX - touchStart.current.x
+    const deltaY = touch.clientY - touchStart.current.y
 
-      const deltaX = touch.clientX - touchStart.current.x
-      const deltaY = touch.clientY - touchStart.current.y
+    handleMove(deltaX, deltaY)
+  }
 
-      handleMove(deltaX, deltaY)
-    },
-    [handleMove]
-  )
-
-  const handleMouseDown = useCallback((event: React.MouseEvent) => {
+  const handleMouseDown = (event: React.MouseEvent) => {
     touchStart.current = { x: event.clientX, y: event.clientY }
     isDragging.current = true
 
     setIsAutoplay(false)
-  }, [])
+  }
 
-  const handleMouseMove = useCallback(
-    (event: React.MouseEvent) => {
-      if (!isDragging.current) return
-
+  const handleMouseMove = (event: React.MouseEvent) => {
+    if (isDragging.current) {
       const deltaX = event.clientX - touchStart.current.x
       const deltaY = event.clientY - touchStart.current.y
 
       handleMove(deltaX, deltaY)
-    },
-    [handleMove]
-  )
+    }
+  }
 
-  const handleMouseUp = useCallback(() => {
+  const handleMouseUp = () => {
     isDragging.current = false
-  }, [])
+  }
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      const isTouched = Object.values(touchStart.current).some(Boolean)
-
-      setIsAutoplay(!isTouched)
+      setIsAutoplay(!Object.values(touchStart.current).some(Boolean))
     }, 10000)
 
     return () => {
