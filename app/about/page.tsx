@@ -4,7 +4,7 @@ export default function About() {
   return (
     <>
       <Link
-        className="fixed top-0 right-0 px-3 py-2 z-10 uppercase tracking-tighter font-medium cursor-pointer text-black hover:opacity-50"
+        className="fixed bottom-0 md:top-0 right-0 px-3 py-2 z-10 uppercase tracking-tighter font-medium cursor-pointer text-black hover:opacity-50"
         href="/"
         title="HOME"
       >
