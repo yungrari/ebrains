@@ -4,6 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { cn } from '@/lib/utils'
 import Constructivism from '@/components/constructivism'
+import Navigation from '@/components/navigation'
 
 import './globals.css'
 
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={cn(inter.className, 'overflow-hidden')}>
         <main className="h-svh overflow-y-auto">
           <Constructivism />
+          <Navigation />
           {children}
         </main>
         <SpeedInsights />
