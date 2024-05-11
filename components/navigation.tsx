@@ -8,7 +8,7 @@ export default function Navigation() {
 
   return (
     <Link
-      className="fixed bottom-0 md:top-0 right-0 px-3 py-2 z-10 uppercase tracking-tighter font-medium"
+      className="fixed bottom-0 md:bottom-auto md:top-0 right-0 px-3 py-2 z-10 uppercase tracking-tighter font-medium"
       href={pathname === '/' ? '/about' : '/'}
       prefetch={false}
     >
