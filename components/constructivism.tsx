@@ -12,6 +12,9 @@ import pic4 from '@/public/4.webp'
 import pic5 from '@/public/5.webp'
 
 const config = {
+  width: 40,
+  height: 30,
+  perspective: 5000,
   items: [
     { src: pic1, alt: 'MEG' },
     { src: pic2, alt: 'DIE' },
@@ -20,10 +23,6 @@ const config = {
     { src: pic5, alt: 'TOR' },
   ],
 }
-
-const WIDTH = 40
-const HEIGHT = 30
-const PERSPECTIVE = 5000
 
 export default function Constructivism() {
   const [degree, setDegree] = useState([0, 0])
@@ -89,9 +88,9 @@ export default function Constructivism() {
     <div
       className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-move"
       style={{
-        width: `${WIDTH}vw`,
-        height: `${HEIGHT}vh`,
-        perspective: `${PERSPECTIVE}px`,
+        width: `${config.width}vw`,
+        height: `${config.height}vh`,
+        perspective: `${config.perspective}px`,
       }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
@@ -114,12 +113,12 @@ export default function Constructivism() {
             key={item.alt}
             className="absolute bg-no-repeat bg-center overflow-hidden border border-solid border-neutral-300"
             style={{
-              width: `${WIDTH}vw`,
-              height: `${HEIGHT}vh`,
+              width: `${config.width}vw`,
+              height: `${config.height}vh`,
               transform: `rotateY(${
                 (360 / array.length) * index
               }deg) translateZ(${(
-                WIDTH /
+                config.width /
                 2 /
                 Math.tan(Math.PI / array.length)
               ).toFixed(4)}vw)`,
