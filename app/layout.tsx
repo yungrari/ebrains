@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { ViewTransitions } from 'next-view-transitions'
 
 import { cn } from '@/lib/utils'
 import Constructivism from '@/components/constructivism'
@@ -21,15 +22,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={cn(inter.className, 'overflow-hidden')}>
-        <main className="h-svh overflow-y-auto">
-          <Constructivism />
-          <Navigation />
-          {children}
-        </main>
-        <SpeedInsights />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body className={cn(inter.className, 'overflow-hidden')}>
+          <main className="h-svh overflow-y-auto">
+            <Constructivism />
+            <Navigation />
+            {children}
+          </main>
+          <SpeedInsights />
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }
